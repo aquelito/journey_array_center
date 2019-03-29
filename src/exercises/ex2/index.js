@@ -1,12 +1,9 @@
 function howMuchButterDoINeed(elements) {
 
-	let total = 0;
-
-	for(const i in elements) {
-		if(elements.hasOwnProperty(i)) {
-			total += elements[i].butter;
-		}
-	}
+	const total = elements.reduce((acc, element) => {
+		// console.log(element)
+		return acc + element.butter
+	}, 0)
 
 	return total;
 }

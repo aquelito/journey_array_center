@@ -2,21 +2,16 @@ const { flatten } = require('../../utils/flatten');
 
 function getPlayersNameFromPlays(plays) {
 
-	const finalPlayers = [];
+	const filter = plays
+	  .filter(obj => obj.time > 60)
+		.map(obj => {
+			return obj.players.reduce((acc, obj2) => {
+				return acc.includes(obj2.name) ? acc : acc.concat(obj2.name)
+			}, [])
+		})
 
-	for(const play in plays) {
-		if(plays.hasOwnProperty(play)) {
-
-			for(const player of plays[play].players) {
-				if(plays[play].time > 60
-					&& finalPlayers.indexOf(player.name) === -1) {
-					finalPlayers.push(player.name);
-				}
-			}
-		}
-	}
-
-	return finalPlayers;
+	const finalPlayers = filter.flat();
+	return finalPlayers
 }
 
 module.exports = {

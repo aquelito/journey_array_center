@@ -8,30 +8,14 @@ function getScore() {
 
 			const content = JSON.parse(data);
 
-			let scoreFor = 0;
-			let scoreWhile = 0;
-
-			for(const i in content) {
-				if(content.hasOwnProperty(i)) {
-
-					if(i === 'scoreFor') {
-
-						for(let j = 0; j < content[i].length; j++) {
-							scoreFor += Number(content[i][j]);
-						}
-
-					} else if(i === 'scoreWhile') {
-						for(let k = 0; k < content[i].length; k++) {
-							scoreWhile += Number(content[i][k]);
-						}
-					}
-				}
-			}
+			const test = Object.keys(content)
+				.filter(key => key === 'scoreFor' || key === 'scoreWhile')
+				.map(key => content[key].reduce((acc, element) => acc += element, 0));
 
 			resolve({
-				scoreFor: scoreFor,
+				scoreFor: test[0],
 				totalFor: content.totalFor,
-				scoreWhile: scoreWhile,
+				scoreWhile: test[1],
 				totalWhile: content.totalWhile
 			});
 		});
@@ -43,16 +27,7 @@ function getBadges(){
 		fs.readFile('src/exercises/ex8/files/badges.json', 'utf-8', (err,data) => {
 			const contentFileParsed = JSON.parse(data);
 
-			let allBadges = [];
-
-			for(const key in contentFileParsed){
-				if(contentFileParsed.hasOwnProperty(key)){
-					for(let i = 0; i < contentFileParsed[key].length; i++){
-						allBadges.push(contentFileParsed[key][i]);
-					}
-				}
-			}
-
+			let allBadges = Object.values(contentFileParsed).flat();
 			resolve(allBadges);
 		});
 	});

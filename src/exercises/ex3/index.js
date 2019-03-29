@@ -1,39 +1,15 @@
 function doIHaveFruits(fruits, whatIHave) {
-
-	let haveFruits = false;
-
-	for (let i = 0; i < whatIHave.length; i++) {
-		if(fruits.indexOf(whatIHave[i]) !== -1) {
-			haveFruits = true;
-		}
-	}
-
+	let haveFruits = whatIHave.some(elm => fruits.includes(elm));
 	return haveFruits;
 }
 
 function urlHasKeyword(splittedUrl) {
-
-	let hasEasterEgg = false;
-
-	for(const part in splittedUrl) {
-		if(splittedUrl.hasOwnProperty(part) && splittedUrl[part] === 'easteregg') {
-			hasEasterEgg = true;
-		}
-	}
-
+	let hasEasterEgg = splittedUrl.some(elm => elm === 'easteregg');
 	return hasEasterEgg;
 }
 
 function everyNoteUpThanTen(minNote, notes) {
-
-	let allNotesGood = true;
-
-	for(const note of notes) {
-		if(note <= minNote) {
-			allNotesGood = false;
-		}
-	}
-
+	let allNotesGood = notes.every(elm => elm >= minNote);
 	return allNotesGood;
 }
 

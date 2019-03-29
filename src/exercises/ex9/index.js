@@ -1,43 +1,37 @@
 function checkMostUsedWord(text) {
     const listOfWords = text.toLocaleUpperCase().split(' '); 
-    let mostUsedWord = '', maxTimes = 0;
 
-    for(let i=0; i < listOfWords.length; i++){
-
-        let counter = 0;
-
-        for(let j=0; j < listOfWords.length; j++){
-            counter += (listOfWords[i] === listOfWords[j])?1:0;
-        }
-
-        if(counter > maxTimes){
-            mostUsedWord = listOfWords[i];
-            maxTimes = counter;
-        }
+    const outputWords = listOfWords
+        .reduce((count, word) => {
+            count[word] = count.hasOwnProperty(word) ? count[word] + 1 : 1;
+            return count;
+        }, {})
+    
+    let sortable = []
+    for (let word in outputWords) {
+        sortable.push([word, outputWords[word]]);
     }
 
-    return mostUsedWord;
+    const output = sortable.sort((a, b) => b[1] - a[1]);
+    return output[0][0];
 }
 
 function checkLessUsedWord(text){
     const listOfWords = text.toLocaleUpperCase().split(' '); 
-    let lessUsedWord = '', minTimes = 1;
 
-    for(let i=0; i < listOfWords.length; i++){
-
-        let counter = 0;
-
-        for(let j=0; j < listOfWords.length; j++){
-            counter += (listOfWords[i] === listOfWords[j])?1:0;
-        }
-
-        if(counter <= minTimes){
-            lessUsedWord = listOfWords[i];
-            minTimes = counter;
-        }
+    const outputWords = listOfWords
+        .reduce((count, word) => {
+            count[word] = count.hasOwnProperty(word) ? count[word] + 1 : 1;
+            return count;
+        }, {})
+    
+    let sortable = []
+    for (let word in outputWords) {
+        sortable.push([word, outputWords[word]]);
     }
-
-    return lessUsedWord;
+    
+    const output = sortable.sort((a, b) => a[1] - b[1]);
+    return output[0][0];
 }
 
 module.exports = {

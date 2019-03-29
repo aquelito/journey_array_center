@@ -1,27 +1,16 @@
-function isEven(n){
-    return n % 2 === 0;
+function isEven (n) {
+  const output = n % 2 === 0;
+  return output
 }
 
-function evens(arr){
-    const res = [];
-    
-    for(let i = 0; i< arr.length; i++){
-        if(isEven(arr[i]))
-            res.push(arr[i]);
-    }
-
-    return res;
+function evens (arr) {
+  const output = arr.filter(isEven);
+  return output
 }
 
-function odds(arr){
-    const res = [];
-
-    for(let i = 0; i< arr.length; i++){
-        if(!isEven(arr[i]))
-            res.push(arr[i]);
-    }
-
-    return res;
+function odds (arr) {
+  const output = arr.filter((elù)=> !isEven(elù))
+  return output
 }
 
 module.exports = {
